@@ -22,8 +22,9 @@ const Hero = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (!title || !desc) return toast.error('Title and description are required');
-
+    if(!title || !desc) {
+      return toast.error('Title and description are required');
+    }
     const payload = { title, desc, done: false };
 
     if (isEditing) {
@@ -87,8 +88,9 @@ const Hero = () => {
   };
 
   const filteredTasks = main.filter((task) => {
-  if (!task || typeof task !== 'object') return false;
-
+  if (!task || typeof task !== 'object'){ 
+    return false;
+  }
   const title = typeof task.title === 'string' ? task.title : '';
   const desc = typeof task.desc === 'string' ? task.desc : '';
 
@@ -97,7 +99,6 @@ const Hero = () => {
     desc.toLowerCase().includes(searchTerm.toLowerCase())
   );
 });
-
 
   return (
     <>
