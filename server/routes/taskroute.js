@@ -5,13 +5,12 @@ const validateTask = require('../middleware/validateTask');
 
 const router = express.Router();
 
-// Get all tasks
+
 router.get('/', async (req, res) => {
   const tasks = await Task.find();
   res.json(tasks);
 });
 
-// Create new task with validation
 router.post('/', validateTask, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -23,7 +22,6 @@ router.post('/', validateTask, async (req, res) => {
   res.status(201).json(task);
 });
 
-// Update task with validation
 router.put('/:id', validateTask, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -34,7 +32,6 @@ router.put('/:id', validateTask, async (req, res) => {
   res.json(task);
 });
 
-// Delete task
 router.delete('/:id', async (req, res) => {
   await Task.findByIdAndDelete(req.params.id);
   res.json({ message: 'Task deleted' });
